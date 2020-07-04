@@ -1,0 +1,25 @@
+{
+  "name": "Money-io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/humaidk2/Money-io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/humaidk2/Money-io/issues"
+  },
+  "homepage": "https://github.com/humaidk2/Money-io#readme",
+  "dependencies": {
+    "cool-ascii-faces": "^1.3.4",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1"
+  }
+}
