@@ -1,14 +1,14 @@
 var Sequelize = require('sequelize');
 var supersecret = require('../../config/config');
 var sequelize = new Sequelize({
-  database:'MoneyIo', 
+  database: supersecret.dbName, 
   username: supersecret.dbUser, 
   password: supersecret.dbPassword,
   host: supersecret.dbHost,
   dialect: 'mysql'
 }); 
 
-var bcrypt = require('bcrypt-nodejs');
+var bcrypt = require('bcrypt');
 
 
 var User = sequelize.define('User', {
