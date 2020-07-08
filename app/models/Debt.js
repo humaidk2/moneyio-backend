@@ -1,14 +1,14 @@
 var Sequelize = require('sequelize');
 var supersecret = require('../../config/config');
 var sequelize = new Sequelize({
-    database:'MoneyIo', 
+    database: supersecret.dbName, 
     username: supersecret.dbUser, 
     password: supersecret.dbPassword,
     host: supersecret.dbHost,
     dialect: 'mysql'
   }); 
 
-var Debts = sequelize.define('Debt', {
+var Debt = sequelize.define('Debt', {
     type: {
         type: Sequelize.STRING,
         validate: {
@@ -43,4 +43,4 @@ var Debts = sequelize.define('Debt', {
 //         password: 'admin'
 //     });
 // });
-module.exports = Debts
+module.exports = Debt
