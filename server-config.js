@@ -21,8 +21,13 @@ var Sequelize = require('sequelize');
 //   host: supersecret.dbHost,
 //   dialect: 'mysql'
 // }); 
-var sequelize = new Sequelize('')
-
+var sequelize = new Sequelize({
+  database: supersecret.dbName, 
+  username: supersecret.dbUser, 
+  password: supersecret.dbPassword,
+  host: supersecret.dbHost,
+  dialect: 'mysql'
+}); 
 
 sequelize
   .authenticate()
