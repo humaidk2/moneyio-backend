@@ -1,14 +1,14 @@
 var Sequelize = require('sequelize');
 var supersecret = require('../../config/config');
 var sequelize = new Sequelize({
-    database:'PacmanVR', 
-    username: 'root', 
+    database: supersecret.dbName, 
+    username: supersecret.dbUser, 
     password: supersecret.dbPassword,
-    host: 'localhost',
+    host: supersecret.dbHost,
     dialect: 'mysql'
- }); 
+  }); 
   
-var Spendings = sequelize.define('Spending', {
+var Transaction = sequelize.define('Transaction', {
     category: {
         type: Sequelize.STRING,
         validate: {
@@ -33,12 +33,5 @@ var Spendings = sequelize.define('Spending', {
     freezeTableName: true
 })
 
-// // force: true will drop the table if it already exists
-// User.sync({force: true}).then(function () {
-//     return User.create({
-//         username: 'admin',
-//         email: 'testtest@gmail.com',
-//         password: 'admin'
-//     });
-// });
-module.exports = Spendings
+
+module.exports = Transaction
