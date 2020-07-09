@@ -1,13 +1,13 @@
 var Sequelize = require('sequelize');
 var supersecret = require('../../config/config');
+//var sequelize = new Sequelize(process.env.DATABASE_URL);  
 var sequelize = new Sequelize({
-  database: supersecret.dbName, 
-  username: supersecret.dbUser, 
-  password: supersecret.dbPassword,
-  host: supersecret.dbHost,
+  database: 'MoneyIo', 
+  username: process.env.DB_USERNAME, 
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_NAME,
   dialect: 'mysql'
 }); 
-
 var bcrypt = require('bcrypt');
 
 

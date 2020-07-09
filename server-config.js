@@ -22,10 +22,10 @@ var Sequelize = require('sequelize');
 //   dialect: 'mysql'
 // }); 
 var sequelize = new Sequelize({
-  database: supersecret.dbName, 
-  username: supersecret.dbUser, 
-  password: supersecret.dbPassword,
-  host: supersecret.dbHost,
+  database: process.env.DB_NAME, 
+  username: process.env.DB_USERNAME, 
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
   dialect: 'mysql'
 }); 
 
