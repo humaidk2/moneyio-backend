@@ -1,4 +1,12 @@
+var nodemailer = require('nodemailer');
 
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.NODE_MAIL_USER,
+    pass: process.env.NODE_MAIL_PASS
+  }
+});
 
 module.exports = function(app, passport) {
     app.post('/signup', function(req, res) {
@@ -30,3 +38,4 @@ module.exports = function(app, passport) {
         })(req, res, next);
     })
 }
+
