@@ -1,11 +1,10 @@
 var Sequelize = require('sequelize');
-var supersecret = require('../../config/config');
 //var sequelize = new Sequelize(process.env.DATABASE_URL);  
 var sequelize = new Sequelize({
-  database: 'MoneyIo', 
+  database: process.env.DB_NAME, 
   username: process.env.DB_USERNAME, 
   password: process.env.DB_PASSWORD,
-  host: process.env.DB_NAME,
+  host: process.env.DB_HOST,
   dialect: 'mysql'
 }); 
 var bcrypt = require('bcrypt');
@@ -38,6 +37,13 @@ var User = sequelize.define('User', {
   password: {
     type: Sequelize.STRING,
     defaultValue: null
+  }, active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
+  token: {
+    type: Sequelize.TEXT,
+    allowNull: true
   }
 }, {
   freezeTableName: true,
@@ -52,12 +58,18 @@ User.generateHash = function(password) {
   
 
 // force: true will drop the table if it already exists
-User.sync({force: true}).then(function () {
-  return User.create({
-    username: 'admin',
-    email: 'testtest@gmail.com',
-    password: 'admin'
-  });
-});
+// User.sync({force: false}).then(function () {
+//   return;
+//   // User.create({
+//   //   username: 'admin2',
+//   //   email: 'test2test@gmail.com',
+//   //   password: 'admin2'
+//   // });
+//   // return User.create({
+//   //   username: 'admin',
+//   //   email: 'testtest@gmail.com',
+//   //   password: 'admin'
+//   // });
+// });
 
 module.exports = User;
