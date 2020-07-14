@@ -3,7 +3,8 @@ module.exports = function(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     } else {
-        res.redirect('/signin')
+        // res.redirect('/signin')
         // res.send({"stupid":"ok"});
+        res.status(500).send({ error: "boo:(" });
     }
 }
