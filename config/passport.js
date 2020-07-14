@@ -1,11 +1,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
-var User = require('../app/models/user');
 var jwt = require('jsonwebtoken');
-var supersecret = require('../config/config');
 
-module.exports = function(passport) {
+module.exports = function(passport, User) {
   // serialize and deserialize users for sessions
   passport.serializeUser(function(user, done) {
     console.log('hit serialize')
@@ -21,9 +19,9 @@ module.exports = function(passport) {
   });
 
   passport.use(new FacebookStrategy({
-    clientID: supersecret.FACEBOOK_APP_ID,
-    clientSecret: supersecret.FACEBOOK_APP_SECRET,
-    callbackURL: `${supersecret.link}/auth/facebook/callback`
+    clientID: process.env.FB_APP_ID,
+    clientSecret: process.env.FB_APP_SECRET,
+    callbackURL: `${process.env.MAIL_LINK}/auth/facebook/callback`
     // profileFields: ['id', 'displayName'],
     // enableProof: true
   }, function(accessToken, refreshToken, profile, cb) {
@@ -99,7 +97,7 @@ module.exports = function(passport) {
           //     expiresIn: '90d' // expires in 90 days, unit seconds
           //   });
           var unique = {username: req.body.username, email: req.body.email};
-          var token = jwt.sign({unique}, supersecret.secret, {
+          var token = jwt.sign({unique}, process.env.JWT_SECRET, {
           expiresIn: '2d' // expires in 2 days
         });
           User.create({
@@ -114,11 +112,15 @@ module.exports = function(passport) {
             return done(null, user);
           })
           .catch(function(err) {
+            console.log(err);
             return done(err);
             // return done(null, false, {message: 'Error.'});
           });
         }
-      })
+      }).catch(function(err) {
+        console.log(err);
+        // return done(null, false, {message: 'Error.'});
+      });
   }));
 }
 
