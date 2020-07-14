@@ -1,5 +1,4 @@
 var Sequelize = require('sequelize');
-var supersecret = require('../../config/config');
 //var sequelize = new Sequelize(process.env.DATABASE_URL);  
 var sequelize = new Sequelize({
     database: process.env.DB_NAME, 
@@ -23,15 +22,22 @@ var Transaction = sequelize.define('Transaction', {
     },
     date: {
         type: Sequelize.DATE,
-    },
-    user_id: {
-        type: Sequelize.INTEGER,
-        references: 'User',
-        referencesKey: 'id'
     }
 }, {
     freezeTableName: true
-})
-
+});
+// Transaction.sync({force: true}).then(function () {
+//     return;
+//     // return Transaction.create({
+//     //   category: "car",
+//     //   title: "car repairing",
+//     //   amount: 53.4,
+//     //   date:  new Date(Date.UTC(2016, 0, 1)),
+//     //   user_id: 1
+//     // });
+//   }).catch((error)=>{
+//     console.log("error with transaction");
+//     console.log(error);
+// });
 
 module.exports = Transaction
