@@ -37,7 +37,7 @@ sequelize
     console.log('Unable to connect to the database:', err);
   });
 
-let User = require('./app/models/User.js');
+let User = require('./app/models/user.js');
 var Transaction = require('./app/models/Transaction.js');
 var Debt = require('./app/models/Debt.js');
 User.hasMany(Transaction);
