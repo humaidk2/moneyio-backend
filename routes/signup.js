@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 
 module.exports = function(app, passport) {
     app.post('/signup', function(req, res, next) {
-        console.log(req.body);
+        console.log("mybody" + req.body);
         passport.authenticate('local-signup', function(err, user, info, status) {
             if (err) {
               return next(err);
