@@ -8,10 +8,8 @@ module.exports = function(app, isLoggedIn, Transaction) {
         Transaction.findAll({
             where: {user_id: req.session.passport.user.id}
         }).then(function(transactions) {
-            if(!transactions) {
-                res.status(404).send({'Message': "No transactions here"});
-            }
-            res.send(transactions);
+            console.log("hello");
+            res.status(200).send({"Message": true, transactions: transactions});
         })
     })
 }
