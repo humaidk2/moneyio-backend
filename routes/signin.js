@@ -5,9 +5,8 @@ module.exports = function(app, passport) {
               console.log('hit !user')
               res.send(info);
             } else {
-              console.log("no user")
               req.logIn(user, function() {
-                return res.redirect('/')
+                return res.status(200).send({Message: true});
               })
             }
         })(req, res, next)
