@@ -9,6 +9,7 @@ var isLoggedIn = require('./routes/isLoggedIn');
 
 var session = require('express-session');
 var passport = require('passport');
+var cors = require('cors');
 
 var app = express();
 
@@ -89,7 +90,12 @@ Debt.sync({force: true}).then(function () {
   });
 require('./config/passport')(passport, User); //pass passport for configuration
 
-
+app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-type', 'Authorization', 'X-Requested-With'],
+  credentials: true
+}));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
