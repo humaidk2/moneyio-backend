@@ -9,11 +9,11 @@ var sequelize = new Sequelize({
     dialect: 'mysql'
   }); 
 var Debt = sequelize.define('Debt', {
+    person: {
+        type: Sequelize.STRING
+    },
     type: {
-        type: Sequelize.STRING,
-        validate: {
-            len: [1, 255]
-        }
+        type: Sequelize.STRING
     },
     amount: {
         type: Sequelize.FLOAT,
