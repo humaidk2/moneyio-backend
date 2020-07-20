@@ -1,29 +1,36 @@
-var Sequelize = require('sequelize');
+var Sequelize = require("sequelize");
 
-//var sequelize = new Sequelize(process.env.DATABASE_URL); 
+//var sequelize = new Sequelize(process.env.DATABASE_URL);
 var sequelize = new Sequelize({
-    database: process.env.DB_NAME, 
-    username: process.env.DB_USERNAME, 
-    password: process.env.DB_PASSWORD,
-    host: process.env.DB_HOST,
-    dialect: 'mysql'
-  }); 
-var Debt = sequelize.define('Debt', {
+  database: process.env.DB_NAME,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  dialect: "mysql",
+});
+var Debt = sequelize.define(
+  "Debt",
+  {
     person: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING,
+    },
+    description: {
+      type: Sequelize.STRING,
     },
     type: {
-        type: Sequelize.STRING
+      type: Sequelize.STRING,
     },
     amount: {
-        type: Sequelize.FLOAT,
+      type: Sequelize.FLOAT,
     },
     date: {
-        type: Sequelize.DATE,
-    }
-}, {
-    freezeTableName: true
-})
+      type: Sequelize.DATE,
+    },
+  },
+  {
+    freezeTableName: true,
+  }
+);
 
 // // force: true will drop the table if it already exists
 // User.sync({force: true}).then(function () {
@@ -43,4 +50,4 @@ var Debt = sequelize.define('Debt', {
 //     //   user_id: 2
 //     // });
 //   });
-module.exports = Debt
+module.exports = Debt;
