@@ -49,9 +49,6 @@ User.hasMany(Debt);
 Debt.belongsTo(User, {
   foreignKey: 'user_id'
 });
-Debt.belongsTo(User, {
-  foreignKey: 'personOwed'
-});
 User.sync({force: false}).then(function () {
   return;
   User.create({
