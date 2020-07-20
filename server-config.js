@@ -112,7 +112,7 @@ require("./routes/debts")(app, isLoggedIn, Debt);
 require("./routes/getDebts")(app, isLoggedIn, Debt);
 require("./routes/deleteDebts")(app, isLoggedIn, Debt);
 require("./routes/getTransactions")(app, isLoggedIn, Transaction);
-require("./routes/deleteTransactions")(app, isLoggedIn, Debt);
+require("./routes/deleteTransactions")(app, isLoggedIn, Transaction);
 require("./routes/logout")(app);
 require("./routes/signin")(app, passport);
 require("./routes/signup")(app, passport);
