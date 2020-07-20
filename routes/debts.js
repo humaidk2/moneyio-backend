@@ -3,7 +3,6 @@ module.exports = function(app, isLoggedIn, Debt) {
     var type = req.body.type;
     var person = req.body.person;
     var amount = req.body.amount;
-    var personID;
     Debt.create({
       type: type, 
       amount: amount, 
