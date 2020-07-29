@@ -4,15 +4,14 @@ module.exports = function (app, isLoggedIn, Debt) {
     var person = req.body.person;
     var amount = req.body.amount;
     var description = req.body.description;
-    console.log("cmon");
     Debt.create({
       type: type,
       amount: amount,
       person: person,
       description: description,
       user_id: req.session.passport.user.id,
-    }).then(function () {
-      res.end();
+    }).then(function (result) {
+      res.send(result);
     });
   });
 };
