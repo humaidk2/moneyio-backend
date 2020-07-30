@@ -11,6 +11,7 @@ module.exports = function (app, isLoggedIn, Debt) {
       description: description,
       user_id: req.session.passport.user.id,
     }).then(function (result) {
+      result.isLoggedIn = req.isLoggedIn;
       res.send(result);
     });
   });

@@ -13,6 +13,7 @@ module.exports = function (app, isLoggedIn, Transaction) {
       date: currDate,
       user_id: req.session.passport.user.id,
     }).then(function (result) {
+      result.isLoggedIn = req.isLoggedIn;
       res.send(result);
     });
   });

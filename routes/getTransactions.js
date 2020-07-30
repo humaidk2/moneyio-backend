@@ -3,7 +3,13 @@ module.exports = function (app, isLoggedIn, Transaction) {
     Transaction.findAll({
       where: { user_id: req.session.passport.user.id },
     }).then(function (transactions) {
-      res.status(200).send({ Message: true, transactions: transactions });
+      res
+        .status(200)
+        .send({
+          Message: true,
+          transactions: transactions,
+          isLoggedIn: req.isLoggedIn,
+        });
     });
   });
 };
