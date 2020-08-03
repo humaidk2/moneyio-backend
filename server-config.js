@@ -45,9 +45,13 @@ Transaction.sync({ force: false })
     return;
   })
   .catch((error) => {});
-Debt.sync({ force: false }).then(function () {
-  return;
-});
+Debt.sync({ force: false })
+  .then(function () {
+    return;
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 require("./config/passport")(passport, User); //pass passport for configuration
 
 app.use(
