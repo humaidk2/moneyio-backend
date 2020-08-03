@@ -13,7 +13,6 @@ var transporter = nodemailer.createTransport({
 
 module.exports = function (app, passport) {
   app.post("/signup", function (req, res, next) {
-    console.log("mybody" + req.body);
     passport.authenticate("local-signup", function (err, user, info, status) {
       if (err) {
         return next(err);
@@ -30,9 +29,8 @@ module.exports = function (app, passport) {
 
         transporter.sendMail(mailOptions, function (error, info) {
           if (error) {
-            return console.log(error);
+            res.status(400).send(error);
           }
-          console.log("Message sent:", info.messageId, info.response);
         });
 
         res.status(200).send({});

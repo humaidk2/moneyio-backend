@@ -11,13 +11,7 @@ var cors = require("cors");
 var app = express();
 
 var Sequelize = require("sequelize");
-// var sequelize = new Sequelize({
-//   database: '',
-//   username: supersecret.dbUser,
-//   password: supersecret.dbPassword,
-//   host: supersecret.dbHost,
-//   dialect: 'mysql'
-// });
+
 var sequelize = new Sequelize({
   database: process.env.DB_NAME,
   username: process.env.DB_USERNAME,
@@ -28,12 +22,8 @@ var sequelize = new Sequelize({
 
 sequelize
   .authenticate()
-  .then(function (err) {
-    console.log("Connection established successfully!");
-  })
-  .catch(function (err) {
-    console.log("Unable to connect to the database:", err);
-  });
+  .then(function (err) {})
+  .catch(function (err) {});
 
 let User = require("./app/models/user.js");
 var Transaction = require("./app/models/Transaction.js");
@@ -46,43 +36,17 @@ User.hasMany(Debt);
 Debt.belongsTo(User, {
   foreignKey: "user_id",
 });
+// force: true will drop the table if it already exists
 User.sync({ force: false }).then(function () {
   return;
-  User.create({
-    username: "admin2",
-    email: "test2test@gmail.com",
-    password: "admin2",
-  });
-  return User.create({
-    username: "admin",
-    email: "testtest@gmail.com",
-    password: "admin",
-  });
 });
-Transaction.sync({ force: true })
+Transaction.sync({ force: false })
   .then(function () {
     return;
-    // return Transaction.create({
-    //   category: "car",
-    //   title: "car repairing",
-    //   amount: 53.4,
-    //   date:  new Date(Date.UTC(2016, 0, 1)),
-    //   user_id: 1
-    // });
   })
-  .catch((error) => {
-    console.log("error with transaction");
-    console.log(error);
-  });
-Debt.sync({ force: true }).then(function () {
+  .catch((error) => {});
+Debt.sync({ force: false }).then(function () {
   return;
-  // return Debt.create({
-  //   type: 'entertainment',
-  //   personOwed: 1,
-  //   amount: 50,
-  //   date:  new Date(Date.UTC(2016, 0, 1)),
-  //   user_id: 2
-  // });
 });
 require("./config/passport")(passport, User); //pass passport for configuration
 
@@ -107,7 +71,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require("./routes/currency")(app, isLoggedIn);
 require("./routes/debts")(app, isLoggedIn, Debt);
 require("./routes/getDebts")(app, isLoggedIn, Debt);
 require("./routes/deleteDebts")(app, isLoggedIn, Debt);

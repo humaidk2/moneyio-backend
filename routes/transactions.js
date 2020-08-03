@@ -4,8 +4,6 @@ module.exports = function (app, isLoggedIn, Transaction) {
     var title = req.body.title;
     var amount = req.body.amount;
     var currDate = req.body.date;
-    // var userID = req.session.user.id;
-    console.log("id", req.session.passport.user.id);
     Transaction.create({
       category: category,
       title: title,
