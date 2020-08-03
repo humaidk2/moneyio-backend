@@ -8,28 +8,32 @@ var sequelize = new Sequelize({
   host: process.env.DB_HOST,
   dialect: "mysql",
 });
-var Debt = sequelize.define(
-  "Debt",
-  {
-    person: {
-      type: Sequelize.STRING,
+var Debt = sequelize
+  .define(
+    "Debt",
+    {
+      person: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
+      },
+      type: {
+        type: Sequelize.STRING,
+      },
+      amount: {
+        type: Sequelize.FLOAT,
+      },
+      date: {
+        type: Sequelize.DATE,
+      },
     },
-    description: {
-      type: Sequelize.STRING,
-    },
-    type: {
-      type: Sequelize.STRING,
-    },
-    amount: {
-      type: Sequelize.FLOAT,
-    },
-    date: {
-      type: Sequelize.DATE,
-    },
-  },
-  {
-    freezeTableName: true,
-  }
-);
+    {
+      freezeTableName: true,
+    }
+  )
+  .catch((error) => {
+    console.log(error);
+  });
 
 module.exports = Debt;

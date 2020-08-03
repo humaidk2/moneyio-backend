@@ -29,9 +29,9 @@ module.exports = function (app, passport) {
       } else {
         // send Email
         var mailOptions = {
-          from: '"Blinky" <communication.vrpacman@gmail.com>',
+          from: '"Money-IO" <communication.vrpacman@gmail.com>',
           to: user.email,
-          subject: "Confirm registration for VR Pacman",
+          subject: "Confirm registration for Money-IO",
           text: `Hi ${user.username}!\n\nPlease verify your account by clicking the following link: ${process.env.MAIL_LINK}/verifyemail?unique=${user.token}\n\nIf you believe you have received this email in error, please ignore this email.`,
         };
 
