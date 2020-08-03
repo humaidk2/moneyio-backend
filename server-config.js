@@ -52,7 +52,7 @@ require("./config/passport")(passport, User); //pass passport for configuration
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://money-io.vercel.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-type", "Authorization", "X-Requested-With"],
     credentials: true,
