@@ -6,7 +6,9 @@ module.exports = function (app, passport) {
         res.send(info);
       } else {
         req.logIn(user, function () {
-          return res.status(200).send({ Message: true, isLoggedIn: true });
+          return res
+            .status(200)
+            .send({ Message: true, isLoggedIn: true, username: user.username });
         });
       }
     })(req, res, next);
