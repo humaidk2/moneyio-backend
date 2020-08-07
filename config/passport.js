@@ -2,6 +2,8 @@ var LocalStrategy = require("passport-local").Strategy;
 var FacebookStrategy = require("passport-facebook").Strategy;
 
 var jwt = require("jsonwebtoken");
+var passport = require("passport");
+var CustomGoogleStrategy = require("./verifyGooglePassport");
 
 module.exports = function (passport, User) {
   // serialize and deserialize users for sessions
@@ -43,6 +45,28 @@ module.exports = function (passport, User) {
           });
       }
     )
+  );
+  passport.use(
+    "custom-google",
+    new CustomGoogleStrategy({}, function (req, payload, cb) {
+      // var user = { oAuthID: profile.id, username: profile.displayName };
+      User.findOrCreate({
+        where: {
+          oAuthID: payload.sub,
+        },
+        defaults: {
+          username: payload.name,
+          email: payload.email,
+          active: true,
+        },
+      })
+        .then(function (user) {
+          return cb(null, user[0]);
+        })
+        .catch(function (err) {
+          return cb(err, null);
+        });
+    })
   );
 
   passport.use(
