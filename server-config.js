@@ -53,10 +53,9 @@ Debt.sync({ force: false })
     console.log(error);
   });
 require("./config/passport")(passport, User); //pass passport for configuration
-
 app.use(
   cors({
-    origin: "https://money-io.vercel.app",
+    origin: process.env.MONEY_CLIENT_URL,
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-type", "Authorization", "X-Requested-With"],
     credentials: true,
@@ -85,5 +84,6 @@ require("./routes/signin")(app, passport);
 require("./routes/signup")(app, passport);
 require("./routes/transactions")(app, isLoggedIn, Transaction);
 require("./routes/verifyEmail")(app, User);
+require("./routes/verifyGoogle")(app, User);
 
 module.exports = app;
