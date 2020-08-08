@@ -28,9 +28,13 @@ async function verifyToken(req, token) {
   }
   const payload = ticket.getPayload();
   try {
+    console.log("success");
+    console.log(payload);
     self._verify(req, payload, checkIfVerified);
     // self.success(payload);
   } catch (ex) {
+    console.log("error");
+    console.log(ex);
     return self.error(ex);
   }
 }
