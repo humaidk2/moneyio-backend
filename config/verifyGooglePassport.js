@@ -11,8 +11,6 @@ function CustomStrategy(name = "custom", verify) {
   this.name = name;
 }
 CustomStrategy.prototype.authenticate = function (req, options) {
-  console.log("here");
-  console.log("auth" + req.headers.authorization);
   verifyToken.call(this, req, req.headers.authorization).catch(this.fail);
 };
 
@@ -25,19 +23,14 @@ async function verifyToken(req, token) {
   });
   var self = this;
   function checkIfVerified(err, user) {
-    if (err) console.log(err + JSON.stringify(err));
     if (err) return self.error(err);
     self.success(user);
   }
   const payload = ticket.getPayload();
   try {
-    console.log("success");
-    console.log(payload);
     self._verify(req, payload, checkIfVerified);
     // self.success(payload);
   } catch (ex) {
-    console.log("error");
-    console.log(ex);
     return self.error(ex);
   }
 }

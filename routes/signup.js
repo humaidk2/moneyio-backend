@@ -47,7 +47,6 @@ module.exports = function (app, passport) {
         };
 
         transporter.sendMail(mailOptions, function (error, info) {
-          console.log("email sent");
           if (error) {
             console.log(error);
           }

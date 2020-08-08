@@ -49,8 +49,6 @@ module.exports = function (passport, User) {
   passport.use(
     "custom-google",
     new CustomGoogleStrategy({}, function (req, payload, cb) {
-      console.log("custom google stategy");
-      // var user = { oAuthID: profile.id, username: profile.displayName };
       User.findOrCreate({
         where: {
           oAuthID: payload.sub,
