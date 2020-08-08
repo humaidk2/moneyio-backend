@@ -7,6 +7,7 @@ module.exports = function (app, User) {
     res
   ) {
     // do something with req.user
+    console.log("success");
     res.status(200).send({ username: req.session.passport.user.username });
   });
 };

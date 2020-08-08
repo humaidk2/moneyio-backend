@@ -11,6 +11,7 @@ function CustomStrategy(name = "custom", verify) {
   this.name = name;
 }
 CustomStrategy.prototype.authenticate = function (req, options) {
+  console.log("here");
   verifyToken.call(this, req, req.headers.authorization).catch(this.fail);
 };
 
