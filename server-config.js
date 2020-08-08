@@ -83,7 +83,7 @@ require("./routes/logout")(app, isLoggedIn);
 require("./routes/signin")(app, passport);
 require("./routes/signup")(app, passport);
 require("./routes/transactions")(app, isLoggedIn, Transaction);
-require("./routes/verifyEmail")(app, User);
-require("./routes/verifyGoogle")(app, User);
+require("./routes/verifyemail")(app, User);
+require("./routes/verifygoogle")(app, User);
 
 module.exports = app;
