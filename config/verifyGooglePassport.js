@@ -24,6 +24,7 @@ async function verifyToken(req, token) {
   });
   var self = this;
   function checkIfVerified(err, user) {
+    if (err) console.log(err + JSON.stringify(err));
     if (err) return self.error(err);
     self.success(user);
   }
