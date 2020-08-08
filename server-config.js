@@ -57,7 +57,7 @@ app.use(
   cors({
     origin: process.env.MONEY_CLIENT_URL,
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-type", "Authorization", "X-Requested-With"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: true,
   })
 );
@@ -83,7 +83,7 @@ require("./routes/logout")(app, isLoggedIn);
 require("./routes/signin")(app, passport);
 require("./routes/signup")(app, passport);
 require("./routes/transactions")(app, isLoggedIn, Transaction);
-require("./routes/verifyemail")(app, User);
-require("./routes/verifygoogle")(app, User);
+require("./routes/verifyEmail")(app, User);
+require("./routes/verifyGoogle")(app, User);
 
 module.exports = app;
