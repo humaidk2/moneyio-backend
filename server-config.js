@@ -67,9 +67,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "ansfakskcasf",
-    resave: false,
+    resave: true,
     saveUnintialized: false,
-    cookie: { secure: true },
   })
 );
 app.use(passport.initialize());
