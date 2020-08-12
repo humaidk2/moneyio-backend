@@ -67,7 +67,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
     secret: "ansfakskcasf",
-    resave: true,
+    resave: false,
     saveUnintialized: true,
   })
 );
