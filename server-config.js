@@ -69,7 +69,7 @@ app.use(
     secret: "ansfakskcasf",
     resave: false,
     saveUnintialized: false,
-    cookie: { sameSite: "Lax" },
+    cookie: { sameSite: "none", secure: true },
   })
 );
 app.use(passport.initialize());
