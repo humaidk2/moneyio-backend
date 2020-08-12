@@ -1,7 +1,6 @@
 var path = require("path");
 var express = require("express");
 var bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
 var isLoggedIn = require("./routes/isLoggedIn");
 
 var session = require("express-session");
@@ -61,7 +60,6 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -69,7 +67,7 @@ app.use(
     secret: "ansfakskcasf",
     resave: false,
     saveUnintialized: false,
-    cookie: { sameSite: "none", httpOnly: false, secure: true },
+    // cookie: { sameSite: "none", httpOnly: false, secure: true },
   })
 );
 app.use(passport.initialize());
