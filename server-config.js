@@ -68,7 +68,7 @@ app.use(
   session({
     secret: "ansfakskcasf",
     resave: true,
-    saveUnintialized: false,
+    saveUnintialized: true,
   })
 );
 app.use(passport.initialize());
