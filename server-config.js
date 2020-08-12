@@ -69,6 +69,9 @@ app.use(
     secret: "ansfakskcasf",
     resave: false,
     saveUnintialized: false,
+    cookie: {
+      domain: process.env.MONEY_CLIENT_URL,
+    },
   })
 );
 app.use(passport.initialize());
