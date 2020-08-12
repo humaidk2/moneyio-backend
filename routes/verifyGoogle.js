@@ -1,5 +1,3 @@
-var jwt = require("jsonwebtoken");
-
 var passport = require("passport");
 module.exports = function (app, User) {
   app.get("/verifygoogle", passport.authenticate("custom-google"), function (

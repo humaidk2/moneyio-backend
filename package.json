@@ -34,6 +34,7 @@
     "nodemailer": "^6.4.10",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
+    "passport-google-strategy": "^1.0.1",
     "passport-local": "^1.0.0",
     "passport-strategy": "^1.0.0",
     "request": "^2.88.2",
