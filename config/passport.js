@@ -50,6 +50,7 @@ module.exports = function (passport, User) {
     new CustomGoogleStrategy(
       { clientId: process.env.GOOGLE_CLIENT_ID },
       function (req, payload, cb) {
+        console.log("loggedin");
         User.findOrCreate({
           where: {
             oAuthID: payload.sub,
