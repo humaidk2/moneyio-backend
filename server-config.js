@@ -82,6 +82,7 @@ var sessionOptions = {
 if (process.env.TYPE === "PRODUCTION") {
   app.set("trust proxy", 1); // trust first proxy
   sessionOptions.cookie.secure = true; // serve secure cookies
+  sessionOptions.cookie.sameSite = "none";
 }
 app.use(session(sessionOptions));
 app.use(passport.initialize());
