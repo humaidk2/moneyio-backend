@@ -6,14 +6,13 @@ var isLoggedIn = require("./routes/isLoggedIn");
 var session = require("express-session");
 var passport = require("passport");
 var cors = require("cors");
-// var cookieParser = require("cookie-parser");
 const redis = require("redis");
 
 let RedisStore = require("connect-redis")(session);
 let redisClient = redis.createClient(process.env.REDIS_URL);
 
-// redisClient.on("subscribe", console.log);
-// redisClient.on("error", console.error);
+redisClient.on("subscribe", console.log);
+redisClient.on("error", console.error);
 
 var app = express();
 
@@ -59,7 +58,9 @@ Debt.sync({ force: false })
   .catch((error) => {
     console.log(error);
   });
+
 require("./config/passport")(passport, User); //pass passport for configuration
+
 app.use(
   cors({
     origin: process.env.MONEY_CLIENT_URL,
@@ -71,15 +72,18 @@ app.use(
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    secret: "ansfakskcasf",
-    resave: false,
-    saveUninitialized: false,
-    // cookie: { sameSite: "none", httpOnly: false, secure: true },
-  })
-);
+var sessionOptions = {
+  store: new RedisStore({ client: redisClient }),
+  secret: "ansfakskcasf",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {},
+};
+if (process.env.TYPE === "PRODUCTION") {
+  app.set("trust proxy", 1); // trust first proxy
+  sessionOptions.cookie.secure = true; // serve secure cookies
+}
+app.use(session(sessionOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
