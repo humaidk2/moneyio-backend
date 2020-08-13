@@ -6,7 +6,15 @@ var isLoggedIn = require("./routes/isLoggedIn");
 var session = require("express-session");
 var passport = require("passport");
 var cors = require("cors");
-var cookieParser = require("cookie-parser");
+// var cookieParser = require("cookie-parser");
+const redis = require("redis");
+
+let RedisStore = require("connect-redis")(session);
+let redisClient = redis.createClient(process.env.REDIS_URL);
+
+// redisClient.on("subscribe", console.log);
+// redisClient.on("error", console.error);
+
 var app = express();
 
 var Sequelize = require("sequelize");
@@ -52,7 +60,6 @@ Debt.sync({ force: false })
     console.log(error);
   });
 require("./config/passport")(passport, User); //pass passport for configuration
-app.use(cookieParser);
 app.use(
   cors({
     origin: process.env.MONEY_CLIENT_URL,
@@ -61,13 +68,15 @@ app.use(
     credentials: true,
   })
 );
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   session({
+    store: new RedisStore({ client: redisClient }),
     secret: "ansfakskcasf",
     resave: false,
-    saveUnintialized: false,
+    saveUninitialized: false,
     // cookie: { sameSite: "none", httpOnly: false, secure: true },
   })
 );
