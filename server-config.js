@@ -6,7 +6,7 @@ var isLoggedIn = require("./routes/isLoggedIn");
 var session = require("express-session");
 var passport = require("passport");
 var cors = require("cors");
-
+var cookieParser = require("cookie-parser");
 var app = express();
 
 var Sequelize = require("sequelize");
@@ -52,6 +52,7 @@ Debt.sync({ force: false })
     console.log(error);
   });
 require("./config/passport")(passport, User); //pass passport for configuration
+app.use(cookieParser);
 app.use(
   cors({
     origin: process.env.MONEY_CLIENT_URL,
